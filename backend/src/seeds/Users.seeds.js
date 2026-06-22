@@ -9,12 +9,14 @@ dotenv.config({path:path.join(__dirname,'../../.env')});//Nos permite cargar la 
 const seedUsers=async()=>{
     try{
         await mongoose.connect(process.env.Mongo_URI);//Primero nos conectamos con la BDA
+        await Usuario.deleteMany({});//Limpiamos la colección antes de insertar
         const csvData=fs.readFileSync(path.join(__dirname,'../data/CSV/Users.csv'),'utf-8');//Luego transformamos el xlsx en csv
         const lines=csvData.trim().split('\n');//Separamos el csv mediante un split y vamos saltando lineas
         const headers=lines[0].split(',').map(h=>h.replace(/"/g,'').trim());//Obtenemos los headers del csv, para eso necesitamos hacer un split por comas y luego eliminar las comillas y los espacios en blanco
         const users=lines.slice(1).map(line=>{
             const values=line.split(',');//Loegos separamos las lienas con comas
             return {
+                id:parseInt(values[0]?.trim()),//El id lo convertimos a entero
                 nombre:values[1]?.trim(),
                 email:values[2]?.trim(),
                 avatar:values[3]?.trim(),

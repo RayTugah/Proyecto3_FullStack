@@ -21,12 +21,14 @@ const parseCSVLine=(line)=>{
 const seedGames=async()=>{
     try{
         await mongoose.connect(process.env.Mongo_URI);
+        await Games.deleteMany({});//Limpiamos la colección antes de insertar,esto nos permite actualizar la colección
         const csvData=fs.readFileSync(path.join(__dirname,'../data/CSV/Games.csv'),'utf-8');
         const lines=csvData.trim().split('\n');
         const headers=lines[0].split(',').map(h=>h.replace(/"/g,'').trim());
         const games=lines.slice(1).map(line=>{
             const values=parseCSVLine(line);
             return {
+                id:parseInt(values[0]?.trim()),//El id lo convertimos a entero
                 title:values[1]?.trim(),
                 gnre:values[2]?.trim(),
                 description:values[3]?.trim(),

@@ -2,6 +2,11 @@
 const mongoose=require('mongoose');
 
 const usuarioSchema=new mongoose.Schema({
+    id:{
+        type:Number,
+        required:true,
+        unique:true
+    },
     nombre:{
         type:String,
         required:true

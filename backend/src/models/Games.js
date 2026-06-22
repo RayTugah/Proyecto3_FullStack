@@ -2,6 +2,11 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const gameSchema=new Schema({
+    id:{
+        type:Number,
+        required:true,
+        unique:true
+    },
 title:{
     type:String,
     required:true
