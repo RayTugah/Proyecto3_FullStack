@@ -3,3 +3,24 @@
 import axios from 'axios';
 
 //Vamos a crear una función para registrar un usuario, para eso necesitamos usar el método post de axios
+const BASE_URL='http://localhost:3000/api/users'
+
+export const registerUser=async(userData)=>axios.post(`${BASE_URL}/registro`,userData);
+
+export const loginUser=async(userData)=>axios.post(`${BASE_URL}/login`,userData);
+
+export const editUser=async(id,userData,token)=>axios.put(`${BASE_URL}/edit/${id}`,userData,{
+    headers:{Authorization:`Bearer ${token}`}
+});
+export const deleteUser=async(id,token)=>axios.delete(`${BASE_URL}/delete/${id}`,{
+    headers:{Authorization:`Bearer ${token}`}
+});
+export const addGameToLibrary=async(id,gameId,token)=>axios.post(`${BASE_URL}/${id}/library/${gameId}`,{},{
+    headers:{Authorization:`Bearer ${token}`}
+});
+export const removeGameFromLibrary=async(id,gameId,token)=>axios.delete(`${BASE_URL}/${id}/library/${gameId}`,{
+    headers:{Authorization:`Bearer ${token}`}
+});
+export const getLibrary=async(id,token)=>axios.get(`${BASE_URL}/${id}/library`,{
+    headers:{Authorization:`Bearer ${token}`}
+});
