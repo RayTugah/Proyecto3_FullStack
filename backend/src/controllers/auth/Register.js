@@ -10,7 +10,10 @@ const registerUser=async(req,res)=>{
             return res.status(400).json({message:'El usuario ya existe'});
         }
         //Si el usuario no existe, vamos a crear un nuevo usuario, para eso necesitamos usar el método create de mongoose
+        const lastUser=await Usuario.findOne().sort({id:-1});
+        const nextId=lastUser ? lastUser.id+1 : 1;
         const user=await Usuario.create({
+            id:nextId,
             nombre,
             email,
             password: await bcrypt.hash(password, 10)

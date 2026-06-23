@@ -22,7 +22,7 @@ const usuarioSchema=new mongoose.Schema({
     },
     avatar:{
         type:String,
-        default:"https://res.cloudinary.com/dxjv0gq3f/image/upload/v1690911685/ByteStore/avatar-default_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1.png"
+        default:"https://images.unsplash.com/vector-1776244476031-db2aa624a2a0?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     },
     city:{
         type:String,

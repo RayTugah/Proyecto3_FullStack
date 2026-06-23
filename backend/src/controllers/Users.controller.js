@@ -1,5 +1,6 @@
 const Usuario=require('../models/Users');
 const Games=require('../models/Games');
+const {uploadToCloudinary}=require('../middlewares/uploads');
 
 const DeleteUser=async(req,res)=>{
     try{
@@ -18,6 +19,10 @@ const EditUser=async(req,res)=>{
         const user=await Usuario.findOne({id:parseInt(req.params.id)});
         if(!user){
             return res.status(404).json({message:'Usuario no encontrado'});
+        }
+        if(req.file){
+            const avatarUrl=await uploadToCloudinary(req.file.buffer,'avatars');
+            req.body.avatar=avatarUrl;
         }
         const updatedUser=await Usuario.findOneAndUpdate({id:parseInt(req.params.id)},req.body,{new:true});
         return res.status(200).json({message:'Usuario actualizado correctamente',updatedUser});
