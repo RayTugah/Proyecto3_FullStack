@@ -33,8 +33,12 @@ const loginUser=async(req,res)=>{
                 avatar:user.avatar
             }
         });
-    }catch(error){
-        return res.status(500).json({message:'Error del servidor'});
+    } catch(error) {
+  console.error("Error en login:", error);
+  return res.status(500).json({
+    message: "Error del servidor",
+    error: error.message
+  });
     }
 }
 

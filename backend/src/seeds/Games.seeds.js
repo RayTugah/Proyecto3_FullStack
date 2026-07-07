@@ -1,4 +1,8 @@
 const mongoose=require('mongoose');
+const dns = require("node:dns");
+
+dns.setServers(["8.8.8.8", "1.1.1.1"]);
+dns.setDefaultResultOrder("ipv4first");
 const fs=require('fs');
 const path=require('path');
 const dotenv=require('dotenv');
