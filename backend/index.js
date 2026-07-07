@@ -1,6 +1,10 @@
 //Primeramente para incializar este proyecto necesitamos instalar dependencias para el servidor express,
 //Lo primero en el backend es crear el servidor
 const express = require('express');
+const dns = require("node:dns");
+
+dns.setServers(["8.8.8.8", "1.1.1.1"]);
+dns.setDefaultResultOrder("ipv4first");
 //Una vez que tengamos express, necesitamos crear una instancia de express
 const app=express();
 const connectDB=require('./src/db/db');

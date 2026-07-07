@@ -3,7 +3,7 @@
 import axios from 'axios';
 
 //Vamos a crear una función para registrar un usuario, para eso necesitamos usar el método post de axios
-const BASE_URL='http://localhost:3000/api/users'
+const BASE_URL = `${import.meta.env.VITE_API_URL}/users`;
 
 export const registerUser=async(userData)=>axios.post(`${BASE_URL}/registro`,userData);
 
